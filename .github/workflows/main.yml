@@ -50,8 +50,8 @@ jobs:
         with:
           node-version: '21.6.1'  # Versi Node.js yang sama dengan langkah pengujian
 
-      - name: Install NPM dependencies
-        run: npm install --production
+    #   - name: Install NPM dependencies
+    #     run: npm install --production
 
       # Upload file-file publik ke direktori /htdocs/
       - name: Deploy application
