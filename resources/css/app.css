@@ -1,0 +1,30 @@
+@font-face {
+  font-family: 'Toyota Type';
+  src: url('/fonts/Toyota-Type.ttf') format('truetype');
+  font-display: swap;
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+#range-slider-primary {
+  background: url("data:image/svg+xml,%3Csvg width='30' height='30' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23555' fill-rule='evenodd'%3E%3Cpath d='M0 40L40 0H20L0 20M40 40V20L20 40'/%3E%3C/g%3E%3C/svg%3E")
+    #333;
+}
+
+#range-slider-primary .range-slider__range {
+  background: #292B3D;
+  transition: height 0.1s;
+}
+
+#range-slider-primary .range-slider__thumb {
+  background: #202230;
+  height: 18px;
+  width: 18px;
+  transition: transform 0.1s;
+}
+
+.list-bullet li::marker {
+  color: #17A398;
+}

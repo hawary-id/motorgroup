@@ -1,0 +1,76 @@
+name: Deploy
+
+on:
+  push:
+    branches:
+      - development  # Menentukan branch yang akan memicu workflow
+
+jobs:
+  # test:
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: Checkout code
+  #       uses: actions/checkout@v2
+
+  #     - name: Setup PHP
+  #       uses: shivammathur/setup-php@v2
+  #       with:
+  #         php-version: '8.2.4'
+
+  #     - name: Install Composer dependencies
+  #       run: composer install --no-progress --no-suggest --prefer-dist --optimize-autoloader
+
+  #     - name: Run tests
+  #       run: php artisan test
+
+  deploy:
+    runs-on: ubuntu-latest
+    # needs: test  # Pastikan job test selesai sebelum memulai job deploy
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      # Langkah untuk mengatur kunci SSH
+      # - name: Set up SSH keys
+      #   uses: webfactory/ssh-agent@v0.5.3
+      #   with:
+      #     ssh-private-key: ${{ secrets.SSH_KEY }}
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.2.4'
+
+      - name: Install Composer dependencies
+        run: composer install --no-progress --no-suggest --prefer-dist --optimize-autoloader --no-dev
+
+      - name: Install Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '21.6.1'  # Versi Node.js yang sama dengan langkah pengujian
+
+      - name: Install NPM dependencies
+        run: npm install --production
+
+      # Upload file-file publik ke direktori /htdocs/
+      - name: Deploy public assets
+        uses: SamKirkland/FTP-Deploy-Action@4.3.0
+        with:
+          server: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          password: ${{ secrets.PASSWORD }}
+          local-dir: ./public/  # Direktori publik Laravel
+          server-dir: /htdocs/  # Direktori tujuan di server untuk file-file publik
+          method: ftp  # Gunakan sftp jika menggunakan SFTP
+
+      # Upload direktori build ke dalam direktori public
+      - name: Deploy build directory
+        uses: SamKirkland/FTP-Deploy-Action@4.3.0
+        with:
+          server: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          password: ${{ secrets.PASSWORD }}
+          local-dir: ./public/build/  # Direktori publik Laravel
+          server-dir: /htdocs/motoauch/public/build/  # Direktori tujuan di server untuk file-file publik
+          method: ftp  # Gunakan sftp jika menggunakan SFTP
