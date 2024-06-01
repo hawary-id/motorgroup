@@ -4,7 +4,7 @@ on:
   push:
     branches:
       - development  # Menentukan branch yang akan memicu workflow
-      
+
 jobs:
   # test:
   #   runs-on: ubuntu-latest
@@ -61,16 +61,16 @@ jobs:
           username: ${{ secrets.USERNAME }}
           password: ${{ secrets.PASSWORD }}
           local-dir: ./public/  # Direktori publik Laravel
-          server-dir: /htdocs/  # Direktori tujuan di server untuk file-file publik
+          server-dir: /gas/public/  # Direktori tujuan di server untuk file-file publik
           method: ftp  # Gunakan sftp jika menggunakan SFTP
 
-      # Upload direktori build ke dalam direktori public
-      - name: Deploy build directory
-        uses: SamKirkland/FTP-Deploy-Action@4.3.0
-        with:
-          server: ${{ secrets.HOST }}
-          username: ${{ secrets.USERNAME }}
-          password: ${{ secrets.PASSWORD }}
-          local-dir: ./public/build/  # Direktori publik Laravel
-          server-dir: /htdocs/motoauch/public/build/  # Direktori tujuan di server untuk file-file publik
-          method: ftp  # Gunakan sftp jika menggunakan SFTP
+    #   # Upload direktori build ke dalam direktori public
+    #   - name: Deploy build directory
+    #     uses: SamKirkland/FTP-Deploy-Action@4.3.0
+    #     with:
+    #       server: ${{ secrets.HOST }}
+    #       username: ${{ secrets.USERNAME }}
+    #       password: ${{ secrets.PASSWORD }}
+    #       local-dir: ./public/build/  # Direktori publik Laravel
+    #       server-dir: /gas/motoauch/public/build/  # Direktori tujuan di server untuk file-file publik
+    #       method: ftp  # Gunakan sftp jika menggunakan SFTP
