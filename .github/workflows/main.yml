@@ -54,23 +54,36 @@ jobs:
         run: npm install --production
 
       # Upload file-file publik ke direktori /htdocs/
-      - name: Deploy public assets
+      - name: Deploy application
         uses: SamKirkland/FTP-Deploy-Action@4.3.0
         with:
           server: ${{ secrets.HOST }}
           username: ${{ secrets.USERNAME }}
           password: ${{ secrets.PASSWORD }}
-          local-dir: ./public/  # Direktori publik Laravel
-          server-dir: /gas/public/  # Direktori tujuan di server untuk file-file publik
-          method: ftp  # Gunakan sftp jika menggunakan SFTP
+          local-dir: ./ 
+          server-dir: /gas
+          method: ftp
+          exclude: public/
 
-    #   # Upload direktori build ke dalam direktori public
-    #   - name: Deploy build directory
-    #     uses: SamKirkland/FTP-Deploy-Action@4.3.0
-    #     with:
-    #       server: ${{ secrets.HOST }}
-    #       username: ${{ secrets.USERNAME }}
-    #       password: ${{ secrets.PASSWORD }}
-    #       local-dir: ./public/build/  # Direktori publik Laravel
-    #       server-dir: /gas/motoauch/public/build/  # Direktori tujuan di server untuk file-file publik
-    #       method: ftp  # Gunakan sftp jika menggunakan SFTP
+      # Upload file-file publik ke direktori /htdocs/
+      - name: Deploy public assets
+        uses: SamKirkland/FTP-Deploy-Action@4.3.0
+        with:
+            server: ${{ secrets.HOST }}
+            username: ${{ secrets.USERNAME }}
+            password: ${{ secrets.PASSWORD }}
+            local-dir: ./public/ 
+            server-dir: /public_html/globalautosupply.my.id
+            method: ftp  # Gunakan sftp jika menggunakan SFTP
+
+
+      # Upload direktori build ke dalam direktori public
+      - name: Deploy build directory
+        uses: SamKirkland/FTP-Deploy-Action@4.3.0
+        with:
+          server: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          password: ${{ secrets.PASSWORD }}
+          local-dir: ./public/build/ 
+          server-dir: /gas/build/
+          method: ftp  # Gunakan sftp jika menggunakan SFTP
