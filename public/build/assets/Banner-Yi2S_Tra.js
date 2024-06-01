@@ -1,0 +1,1 @@
+import{j as r}from"./app-BkyxIvsK.js";function n({data:e}){return e.images.map((m,a)=>r.jsx("img",{src:m.type==="large"?m.large_image:m.small_image,alt:e.name,className:`container w-full px-3 mx-auto mb-3 md:px-0 md:mb-5 ${m.type==="large"?"hidden md:block":"block md:hidden"}`},a+1))}export{n as B};

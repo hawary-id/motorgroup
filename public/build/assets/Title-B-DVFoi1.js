@@ -1,0 +1,1 @@
+import{j as e}from"./app-BkyxIvsK.js";function m({children:t,className:r}){return e.jsx("h1",{className:`${r} w-full font-['Toyota_Type'] text-2xl border-b text-primary pb-4 mb-3 md:mb-6`,children:t})}export{m as T};
