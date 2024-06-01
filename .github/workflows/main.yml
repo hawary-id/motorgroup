@@ -61,7 +61,7 @@ jobs:
           username: ${{ secrets.USERNAME }}
           password: ${{ secrets.PASSWORD }}
           local-dir: ./ 
-          server-dir: /gas
+          server-dir: /gas/
           method: ftp
           exclude: public/
 
